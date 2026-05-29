@@ -8,6 +8,7 @@ function App() {
   const [allTodos, setTodos] = useState([]);
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
+  const [completedTodos, setCompletedTodos] = useState([]);
   const handleAddTodo = () => {
     let newTodoItem = {
       title: newTitle,
@@ -19,11 +20,47 @@ function App() {
     localStorage.setItem('todolist', JSON.stringify(updatedTodos));
   };
 
+  const handleDeleteTodo = (index) => {
+    let reducedTodo = [...allTodos];
+    reducedTodo.splice(index, 1);
+    setTodos(reducedTodo);
+    localStorage.setItem('todolist', JSON.stringify(reducedTodo));
+  };
+
+  const handleComplete = (index) => {
+    let now = new Date();
+    let dd = now.getDate();
+    let mm = now.getMonth() + 1;
+    let yyyy = now.getFullYear();
+    let h = now.getHours();
+    let m = now.getMinutes();
+    let s = now.getSeconds();
+    let completedOn = `${dd}-${mm}-${yyyy} at ${h}:${m}:${s}`;
+    let filteredTodo = {...allTodos[index], completedOn: completedOn};
+    let updatedCompletedTodoArr = [...completedTodos];
+    updatedCompletedTodoArr.push(filteredTodo);
+    setCompletedTodos(updatedCompletedTodoArr);
+    handleDeleteTodo(index);
+    localStorage.setItem('completedTodos', JSON.stringify(updatedCompletedTodoArr));
+  };
+
+  const handleCompletedDeleteTodo = (index) => {
+    let reducedTodo = [...completedTodos];
+    reducedTodo.splice(index);
+    setCompletedTodos(reducedTodo);
+    localStorage.setItem('completedTodos', JSON.stringify(reducedTodo));
+  };
+
   useEffect(() => {
     let data = localStorage.getItem('todolist');
+    let completedData = localStorage.getItem('completedTodos');
     if (data) {
       let savedTodo = JSON.parse(data);
       setTodos(savedTodo);
+    }
+    if (completedData) {
+      let savedCompletedTodos = JSON.parse(completedData);
+      setCompletedTodos(savedCompletedTodos);
     }
   }, []);
 
@@ -49,7 +86,7 @@ function App() {
           <button className={`secondaryBtn ${isCompleteScreen===true && 'active'}`} onClick={() => setIsCompleteScreen(true)}>Completed</button>
         </div>
         <div className="todo-list">
-          {allTodos.map((item, index) => {
+          {isCompleteScreen===false && allTodos.map((item, index) => {
             return (
               <div className="todo-list-item" key={index}>
                 <div>
@@ -57,8 +94,22 @@ function App() {
                   <p>{item.description}</p>
                 </div>
                 <div>
-                  <AiOutlineDelete className="icon" />
-                  <BsCheckLg className="check-icon" />
+                  <AiOutlineDelete className="icon" onClick={()=> handleDeleteTodo(index)} />
+                  <BsCheckLg className="check-icon" onClick={() => handleComplete(index)} />
+                </div>
+              </div>
+            )
+          })}
+          {isCompleteScreen===true && completedTodos.map((item, index) => {
+            return (
+              <div className="todo-list-item" key={index}>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <p><small>Completed on: {item.completedOn}</small></p>
+                </div>
+                <div>
+                  <AiOutlineDelete className="icon" onClick={()=> handleCompletedDeleteTodo(index)} />
                 </div>
               </div>
             )
