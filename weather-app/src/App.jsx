@@ -2,6 +2,8 @@ import React from 'react'
 import SearchBar from './components/SearchBar';
 import TemperatureToggle from './components/TemperatureToggle';
 import LoadingSpinner from './components/LoadingSpinner';
+import ErrorMessage from './components/ErrorMessage';
+import WeatherCard from './components/WeatherCard';
 
 function App() {
   return (
@@ -9,7 +11,7 @@ function App() {
       {/* Background Image with Overlay*/}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('/weather-bg.png')` }}>
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-purple-900/30 to-indigo-900/40"></div>
-        <div className="absolute inset-0 bg-black-20">
+        <div className="absolute inset-0 bg-black/20">
           
         </div>
         
@@ -27,7 +29,7 @@ function App() {
                 Experience weather like never before with real-time data, beautiful visuals, and precise forecasts for any location worldwide.
               </p>
             </div>
-            <div className="flex flex-col lg:flex-row item-center justify-center space-y-6 lg:space-y-0 lg:space-x-6 mb-12">
+            <div className="flex flex-col lg:flex-row items-center justify-center space-y-6 lg:space-y-0 lg:space-x-6 mb-12">
               <SearchBar />
               <TemperatureToggle />
             </div>
@@ -39,6 +41,16 @@ function App() {
               <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20">
                 <LoadingSpinner />
                 <p className="text-white/80 text-center mt-4 font-medium">Fetching latest weather data.........</p>
+              </div>
+            </div>
+            {/* Conditional Rendering */}
+            <div className="max-w-2xl mx-auto">
+              {/* <ErrorMessage /> */}
+            </div>
+            {/* Conditional Rendering */}
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+              <div className="xl:col-span-2">
+                <WeatherCard />
               </div>
             </div>
           </div>
