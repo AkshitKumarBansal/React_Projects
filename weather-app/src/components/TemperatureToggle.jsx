@@ -1,0 +1,14 @@
+import React from 'react'
+
+function TemperatureToggle() {
+  return (
+    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-shadow-lg">
+      <div className="flex items-center">
+        <button className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duraction-300`}>°C</button>
+        <button className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duraction-300`}>°F</button>
+      </div>
+    </div>
+  )
+}
+
+export default TemperatureToggle
