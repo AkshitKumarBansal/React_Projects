@@ -1,4 +1,5 @@
 📝 React Todo App
+
 A simple, interactive Todo application built with React. This app helps you manage your daily tasks by allowing you to add, track, and complete todos. All data is saved directly to your browser's local storage, so you won't lose your tasks when you refresh the page or close your browser.
 
 ✨ Features
@@ -10,12 +11,14 @@ A simple, interactive Todo application built with React. This app helps you mana
 * **Data Persistence:** Your tasks are saved directly in the browser's `localStorage` (as `todolist` and `completedTodos`), ensuring you never lose your data even if you refresh the page or close your browser.
 
 🛠️ Technologies Used
+
 Technology   Description
 React        Core framework for building the UI components (utilizes React Hooks like useState and useEffect). 
 React Icons  Uses react-icons for intuitive UI actions (Delete and Checkmark icons).
 CSS          Custom styling applied via App.css. 
 
 🚀 Getting Started
+
 To get this project up and running on your local machine, follow these steps:
    Prerequisites
       Make sure you have Node.js and npm installed on your computer.
