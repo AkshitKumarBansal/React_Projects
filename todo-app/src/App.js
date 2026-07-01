@@ -126,11 +126,11 @@ function App() {
             } else {
               return (
                 <div className="todo-list-item" key={index}>
-                  <div>
+                  <div className="todo-item-content">
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                   </div>
-                  <div>
+                  <div className="todo-item-actions">
                     <AiOutlineDelete className="icon" onClick={()=> handleDeleteTodo(index)} />
                     <BsCheckLg className="check-icon" onClick={() => handleComplete(index)} />
                     <AiOutlineEdit className="check-icon" onClick={() => handleEdit (index,item)} title="Edit?" />
@@ -142,12 +142,12 @@ function App() {
           {isCompleteScreen===true && completedTodos.map((item, index) => {
             return (
               <div className="todo-list-item" key={index}>
-                <div>
+                <div className="todo-item-content">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                   <p><small>Completed on: {item.completedOn}</small></p>
                 </div>
-                <div>
+                <div className="todo-item-actions">
                   <AiOutlineDelete className="icon" onClick={()=> handleCompletedDeleteTodo(index)} />
                 </div>
               </div>
